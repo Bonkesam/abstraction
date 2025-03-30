@@ -1,6 +1,5 @@
-
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.24;
+pragma solidity ^0.8.24;
 
 import {Script} from "forge-std/Script.sol";
 import {MinimalAccount} from "src/ethereum/MinimalAccount.sol";
@@ -11,7 +10,10 @@ contract DeployMinimal is Script {
         deployMinimalAccount();
     }
 
-    function deployMinimalAccount() public returns (HelperConfig, MinimalAccount) {
+    function deployMinimalAccount()
+        public
+        returns (HelperConfig, MinimalAccount)
+    {
         HelperConfig helperConfig = new HelperConfig();
         HelperConfig.NetworkConfig memory config = helperConfig.getConfig();
 
@@ -20,10 +22,5 @@ contract DeployMinimal is Script {
         minimalAccount.transferOwnership(config.account);
         vm.stopBroadcast();
         return (helperConfig, minimalAccount);
-    }
-}vm.startBroadcast();
-        MinimalAccount minimalAccount = new MinimalAccount();
-        minimalAccount.transferOwnership(msg.sender);
-        vm.stopBroadcast();
     }
 }
